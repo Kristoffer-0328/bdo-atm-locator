@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <meta name="description" content="Find BDO branches and ATMs across the Philippines with our interactive locator tool">
+    <meta name="keywords" content="BDO, branches, ATM, locator, Philippines, banking">
+    <title>BDO Branch & ATM Locator</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <i class="fas fa-university"></i>
+                <h1>BDO Locator</h1>
+            </div>
+            <p class="subtitle">Find BDO branches and ATMs near you</p>
+            <div class="header-disclaimer">
+                <p><strong>Disclaimer:</strong> This is an independent informational tool utilizing publicly available data from BDO Unibank, Inc. This application is not officially affiliated with, endorsed by, or sponsored by BDO Unibank, Inc.</p>
+            </div>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Search Section -->
+            <section class="search-section">
+                <div class="search-container">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search by city, province, or branch name...">
+                    </div>
+                    
+                    <div class="filters">
+                        <select id="locationFilter">
+                            <option value="">All Locations</option>
+                            <option value="Luzon">Luzon</option>
+                            <option value="Visayas">Visayas</option>
+                            <option value="Mindanao">Mindanao</option>
+                        </select>
+                        
+                        <select id="typeFilter">
+                            <option value="">All Types</option>
+                            <option value="Branches">Branches</option>
+                            <option value="Loan Offices">Loan Offices</option>
+                        </select>
+                        
+                        <button id="clearFilters" class="clear-btn">
+                            <i class="fas fa-times"></i> Clear
+                        </button>
+                        
+                        <button id="toggleMapView" class="map-toggle-btn">
+                            <i class="fas fa-map"></i> <span id="mapToggleText">Show Map</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="results-summary">
+                    <span id="resultsCount">Loading branches...</span>
+                </div>
+            </section>
+
+            <!-- Results Section -->
+            <section class="results-section">
+                <!-- Map View -->
+                <div class="map-container" id="mapContainer" style="display: none;">
+                    <div id="map"></div>
+                    <div class="map-info">
+                        <i class="fas fa-info-circle"></i>
+                        <span id="mapInfoText">Use search or filters to see branch locations on the map (max 100 results)</span>
+                    </div>
+                </div>
+                
+                <!-- List View -->
+                <div class="list-container" id="listContainer">
+                    <div class="branches-grid" id="branchesGrid">
+                        <!-- Branches will be loaded here -->
+                    </div>
+                    
+                    <div class="loading" id="loading">
+                        <i class="fas fa-spinner fa-spin"></i>
+                        <p>Loading branches...</p>
+                    </div>
+                    
+                    <div class="no-results" id="noResults" style="display: none;">
+                        <i class="fas fa-search"></i>
+                        <h3>No branches found</h3>
+                        <p>Try adjusting your search criteria or filters</p>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Branch Details Modal -->
+    <div class="modal" id="branchModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalBranchName"></h2>
+                <button class="close-btn" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="branch-details" id="modalBranchDetails">
+                    <!-- Branch details will be loaded here -->
+                </div>
+                <div class="modal-map-container">
+                    <div id="modalMap" style="height: 300px; border-radius: 8px;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-disclaimer">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Important Disclaimer</h4>
+                    <p><strong>Data Accuracy:</strong> The branch and ATM information presented in this application is static data sourced from publicly available information and may not reflect real-time changes, closures, or operational updates.</p>
+                    <p><strong>Independent Service:</strong> This is an independent, unofficial locator tool and is not affiliated with, endorsed by, or sponsored by BDO Unibank, Inc. or any of its subsidiaries.</p>
+                    <p><strong>Verification Required:</strong> Users are strongly advised to verify branch hours, services, and availability directly with BDO Unibank before visiting any location.</p>
+                    <p><strong>No Warranty:</strong> The information is provided "as is" without warranty of any kind. We assume no responsibility for any errors, omissions, or inaccuracies in the data.</p>
+                </div>
+                <div class="footer-credits">
+                    <p>&copy; 2025 BDO Locator Tool. Educational and informational purposes only.</p>
+                    <p>Map data © <a href="https://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap contributors</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="index.js"></script>
+    <!-- Leaflet JavaScript -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</body>
+</html>
